@@ -1,5 +1,9 @@
 package com.allinpay.autotest.member;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Base64;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
@@ -13,8 +17,15 @@ import com.allinpay.yunst.sdk.util.RSAUtil;
 
 public class MemberServiceTest {
 	public static void main(String[] args) {
-		String member = MemberServiceTest.createMember("16019293");
-		System.out.println(member);
+		//String member = MemberServiceTest.createMember("1601929311");
+	//MemberServiceTest.bindPhone("1601929311","13576911130");
+		//MemberServiceTest.setRealName("1601929311","余振清","1","360101199604066014");
+
+
+//		String member = MemberServiceTest.createMember("10123456899");
+//		System.out.println(member);
+//		MemberServiceTest.applyBindBankCard("16019293",6L,"13576911130","6217002020037294048",
+//				"余振清",1L,"360101199604066015","0421","",false,"105421005302");
 	}
 	private static Logger logger = Logger.getLogger(MemberServiceTest.class.getName());
 	
@@ -28,14 +39,15 @@ public class MemberServiceTest {
 		final YunRequest request = new YunRequest("MemberService", "createMember");
 		if(bizUserId != null && "auto".equalsIgnoreCase(bizUserId))
 			bizUserId = IDGenerator.generateGUID();
-		
 		request.put("bizUserId", bizUserId);
-		request.put("memberType", 3);
-		request.put("source", 2);
+		request.put("memberType", 3);//企业会员 2  个人会员3
+		request.put("source", 2);//Mobile 1 整型    PC 2 整型
+
 		logger.info("[bizUserId="+bizUserId+", memberType=3"+", source=2]");
 		try {
 			String res = YunClient.request(request);
 			JSONObject resp = JSON.parseObject(res);
+			logger.info("创建会员返回{}"+resp.toJSONString());
 //			System.out.println("status=[" + resp.getString("status") + "]");
 //			System.out.println("signedValue=[" + resp.getString("signedValue") + "]");
 //			System.out.println("sign=[" + resp.getString("sign") + "]");
@@ -133,6 +145,36 @@ public class MemberServiceTest {
 		long elapse = end - start;
 		logger.info("================MemberAPI: setRealName end================[elapse: "+ elapse+" ms]");	
 	}
+
+	public static void idCardCollect(String bizUserId, String name, String identityType, String identityNo) {
+		logger.info("================MemberAPI: idCardCollect begin================");
+		long start = System.currentTimeMillis();
+		final YunRequest request = new YunRequest("MemberService", "idcardCollect");
+		try {
+			String picture = JPGToBase64("D:\\workspace\\yunst-sdk-junit-2.0\\pic\\certFront.jpg");
+			request.put("bizUserId", "topep001");
+			request.put("picType", 1L);
+			request.put("picture", picture);
+			String res = YunClient.request(request);
+			JSONObject resp = JSON.parseObject(res);
+//			System.out.println("status=[" + resp.getString("status") + "]");
+//			System.out.println("signedValue=[" + resp.getString("signedValue") + "]");
+//			System.out.println("sign=[" + resp.getString("sign") + "]");
+//			System.out.println("errorCode=[" + resp.getString("errorCode") + "]");
+//			System.out.println("message=[" + resp.getString("message") + "]");
+			String status = resp.getString("status");
+			if(status != null && status.equals("OK")) {
+				logger.info("API[setRealName SUCCESS!]");
+			} else {
+				logger.error("API_ERROR[setRealName RESULT=["+resp.getString("errorCode")+", "+resp.getString("message")+"]]");
+			}
+		} catch (final Exception e) {
+			logger.error("EXCEPTION", e);
+		}
+		long end = System.currentTimeMillis();
+		long elapse = end - start;
+		logger.info("================MemberAPI: setRealName end================[elapse: "+ elapse+" ms]");
+	}
 	
 	
 	public static void getMemberInfo(String bizUserId) {
@@ -204,7 +246,7 @@ public class MemberServiceTest {
 			//System.out.println("res: " + res);
 			
 			JSONObject resp = JSON.parseObject(res);
-			
+			logger.info("申请绑定银行卡返回"+resp.toJSONString());
 //			System.out.println("status=[" + resp.getString("status") + "]");
 //			System.out.println("signedValue=[" + resp.getString("signedValue") + "]");
 //			System.out.println("sign=[" + resp.getString("sign") + "]");
@@ -534,6 +576,21 @@ public class MemberServiceTest {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
+	// 字符串有最大长度限制65534字节
+	public static String JPGToBase64(String imgPath) {
+		byte[] data = null;
+
+		try {
+			InputStream in = new FileInputStream(imgPath);
+			data = new byte[in.available()];
+			in.read(data);
+			in.close();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return Base64.getEncoder().encodeToString(data);
+	}
 }

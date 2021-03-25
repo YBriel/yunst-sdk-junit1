@@ -52,7 +52,7 @@ public class ConsumeApplyTest {
 			
 			
 			// 支付方式
-			//微信扫码支付(正扫) _集团
+			//微信扫码支付(正扫)
 			HashMap<String, Object> SCAN_WEIXIN = new HashMap<>();
 			SCAN_WEIXIN.put("amount", 2);
 			SCAN_WEIXIN.put("limitPay", "no_credit");
@@ -127,13 +127,13 @@ public class ConsumeApplyTest {
 //			payMethod.put("CODEPAY_VSP", CODEPAY_VSP);
 //			payMethod.put("CODEPAY_VSP_ORG", CODEPAY_VSP_ORG);
 //			payMethod.put("SCAN_WEIXIN_ORG", SCAN_WEIXIN_ORG);
-//			payMethod.put("SCAN_WEIXIN", SCAN_WEIXIN);
+			payMethod.put("SCAN_WEIXIN", SCAN_WEIXIN);
 //			payMethod.put("WECHATPAY_APP_OPEN", WECHATPAY_APP_OPEN);
 //			payMethod.put("BALANCE", balancePay);
 //			payMethod.put("COUPON", COUPON);
 //			payMethod.put("REALNAMEPAY_BATCH", realnamePay_batch);
 //			payMethod.put("REALNAMEPAY", realnamePay);
-			payMethod.put("ORDER_VSPPAY", ORDER_VSPPAY);
+	//		payMethod.put("ORDER_VSPPAY", ORDER_VSPPAY);
 //			payMethod.put("SCAN_ALIPAY", SCAN_ALIPAY);
 //			payMethod.put("WeChatPAYAPP_VSP", WeChatPAYAPP_VSP);
 //			payMethod.put("WECHATPAY_APP_OPEN", WECHATPAY_APP_OPEN);
@@ -146,7 +146,7 @@ public class ConsumeApplyTest {
 			request.put("payerId", "WHYGR2019001");
 			request.put("recieverId", "WHYQY2019001");
 			request.put("bizOrderNo", System.currentTimeMillis() + "whyxf");
-			request.put("amount", 1L);
+			request.put("amount", 2L);
 			request.put("fee", 0L);
 			request.put("validateType",1L);
 			
