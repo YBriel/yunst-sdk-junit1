@@ -17,11 +17,11 @@ import com.allinpay.yunst.sdk.util.RSAUtil;
 
 public class MemberServiceTest {
 	public static void main(String[] args) {
-		//String member = MemberServiceTest.createMember("1601929311");
-	//MemberServiceTest.bindPhone("1601929311","13576911130");
-		//MemberServiceTest.setRealName("1601929311","余振清","1","360101199604066014");
+		//String member = MemberServiceTest.createMember("26019293111");
+	//MemberServiceTest.bindPhone("26019293111","15070032716");
+		MemberServiceTest.setRealName("26019293111","涂莉莉","1","360124199106145769");
 
-
+//	MemberServiceTest.idCardCollect("26019293111",1L,"files\\yingyezhizhao.png");
 //		String member = MemberServiceTest.createMember("10123456899");
 //		System.out.println(member);
 //		MemberServiceTest.applyBindBankCard("16019293",6L,"13576911130","6217002020037294048",
@@ -40,7 +40,7 @@ public class MemberServiceTest {
 		if(bizUserId != null && "auto".equalsIgnoreCase(bizUserId))
 			bizUserId = IDGenerator.generateGUID();
 		request.put("bizUserId", bizUserId);
-		request.put("memberType", 3);//企业会员 2  个人会员3
+		request.put("memberType", 2);//企业会员 2  个人会员3
 		request.put("source", 2);//Mobile 1 整型    PC 2 整型
 
 		logger.info("[bizUserId="+bizUserId+", memberType=3"+", source=2]");
@@ -146,14 +146,30 @@ public class MemberServiceTest {
 		logger.info("================MemberAPI: setRealName end================[elapse: "+ elapse+" ms]");	
 	}
 
-	public static void idCardCollect(String bizUserId, String name, String identityType, String identityNo) {
+	/**
+	 *
+	 * @param bizUserId 用户id
+	 * @param identityType 证件类型
+	 * 1-统一社会信用证(三证合一)/营业执照（三证）（一证或三证必传）
+	 * 2-组织机构代码证（三证时必传）
+	 * 3-税务登记证（三证时必传）
+	 * 4-银行开户证明（非必传，上传《银行
+	 * 开户许可证》或《基本存款账户信息》
+	 * 等可证明平台银行账号和户名的文件）
+	 * 5-机构信用代码（非必传）
+	 * 6-ICP 备案许可（非必传）
+	 * 7-行业许可证（非必传）
+	 * 8-身份证正面（人像面）（必传）
+	 * 9-身份证反面（国徽面）（必传）
+	 */
+	public static void idCardCollect(String bizUserId, Long identityType,String fileLocation) {
 		logger.info("================MemberAPI: idCardCollect begin================");
 		long start = System.currentTimeMillis();
 		final YunRequest request = new YunRequest("MemberService", "idcardCollect");
 		try {
-			String picture = JPGToBase64("D:\\workspace\\yunst-sdk-junit-2.0\\pic\\certFront.jpg");
-			request.put("bizUserId", "topep001");
-			request.put("picType", 1L);
+			String picture = JPGToBase64(fileLocation);
+			request.put("bizUserId", bizUserId);
+			request.put("picType", identityType);
 			request.put("picture", picture);
 			String res = YunClient.request(request);
 			JSONObject resp = JSON.parseObject(res);
