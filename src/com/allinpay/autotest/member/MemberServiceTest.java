@@ -17,15 +17,38 @@ import com.allinpay.yunst.sdk.util.RSAUtil;
 
 public class MemberServiceTest {
 	public static void main(String[] args) {
+
+	//	System.setProperty("http.proxyHost", "127.0.0.1");
+		//System.setProperty("http.proxyPort", "8888");
+		//创建会员
+	//	String member = MemberServiceTest.createMember("16019293");
+//		System.out.println(member);
+
+		//绑定手机
+		//MemberServiceTest.bindPhone("16019293","13576911130");
+
+		//实名认证
+		//MemberServiceTest.setRealName("16019293","余振清","1","360101199604066014");
+
+		//获取用户信息
+		//MemberServiceTest.getMemberInfo("16019293");
+
+
+
+
 		//String member = MemberServiceTest.createMember("26019293111");
 	//MemberServiceTest.bindPhone("26019293111","15070032716");
-		MemberServiceTest.setRealName("26019293111","涂莉莉","1","360124199106145769");
+		//MemberServiceTest.setRealName("26019293111","涂莉莉","1","360124199106145769");
 
 //	MemberServiceTest.idCardCollect("26019293111",1L,"files\\yingyezhizhao.png");
 //		String member = MemberServiceTest.createMember("10123456899");
 //		System.out.println(member);
-//		MemberServiceTest.applyBindBankCard("16019293",6L,"13576911130","6217002020037294048",
-//				"余振清",1L,"360101199604066015","0421","",false,"105421005302");
+//		MemberServiceTest.applyBindBankCard("1601929311",7L,"13576911130","6217002020037294048",
+//				"余振清",1L,"360101199604066014","0421","",false,"105421005247");
+
+		//确认绑卡
+		MemberServiceTest.bindBankCard("1601929311","860907547252","20210329","13576911130","091119");
+
 	}
 	private static Logger logger = Logger.getLogger(MemberServiceTest.class.getName());
 	
@@ -85,6 +108,7 @@ public class MemberServiceTest {
 			String res = YunClient.request(request);
 			
 			JSONObject resp = JSON.parseObject(res);
+			logger.info("绑定手机返回"+resp.toJSONString());
 //			System.out.println("status=[" + resp.getString("status") + "]");
 //			System.out.println("signedValue=[" + resp.getString("signedValue") + "]");
 //			System.out.println("sign=[" + resp.getString("sign") + "]");
@@ -130,20 +154,20 @@ public class MemberServiceTest {
 //			System.out.println("sign=[" + resp.getString("sign") + "]");
 //			System.out.println("errorCode=[" + resp.getString("errorCode") + "]");
 //			System.out.println("message=[" + resp.getString("message") + "]");
-			
+
 			String status = resp.getString("status");
 			if(status != null && status.equals("OK")) {
 				logger.info("API[setRealName SUCCESS!]");
 			} else {
 				logger.error("API_ERROR[setRealName RESULT=["+resp.getString("errorCode")+", "+resp.getString("message")+"]]");
 			}
-			
+
 		} catch (final Exception e) {
 			logger.error("EXCEPTION", e);
 		}
 		long end = System.currentTimeMillis();
 		long elapse = end - start;
-		logger.info("================MemberAPI: setRealName end================[elapse: "+ elapse+" ms]");	
+		logger.info("================MemberAPI: setRealName end================[elapse: "+ elapse+" ms]");
 	}
 
 	/**
@@ -173,6 +197,7 @@ public class MemberServiceTest {
 			request.put("picture", picture);
 			String res = YunClient.request(request);
 			JSONObject resp = JSON.parseObject(res);
+			logger.info("个人实名返回"+resp.toJSONString());
 //			System.out.println("status=[" + resp.getString("status") + "]");
 //			System.out.println("signedValue=[" + resp.getString("signedValue") + "]");
 //			System.out.println("sign=[" + resp.getString("sign") + "]");
@@ -202,6 +227,7 @@ public class MemberServiceTest {
 			String res = YunClient.request(request);
 			
 			JSONObject resp = JSON.parseObject(res);
+			logger.info("获取用户信息返回"+resp.toJSONString());
 //			System.out.println("status=[" + resp.getString("status") + "]");
 //			System.out.println("signedValue=[" + resp.getString("signedValue") + "]");
 //			System.out.println("sign=[" + resp.getString("sign") + "]");
@@ -311,11 +337,11 @@ public class MemberServiceTest {
 			request.put("tranceNum", tranceNum);	
 			request.put("transDate", transDate);
 			request.put("phone", phone);	
+			//request.put("validate", RSAUtil.encrypt("0329"));
 			request.put("verificationCode", verificationCode); //TODO smscode
-			
 			String res = YunClient.request(request);
-			
 			JSONObject resp = JSON.parseObject(res);
+			logger.info("绑定银行卡返回信息"+resp.toJSONString());
 //			System.out.println("status=[" + resp.getString("status") + "]");
 //			System.out.println("signedValue=[" + resp.getString("signedValue") + "]");
 //			System.out.println("sign=[" + resp.getString("sign") + "]");
