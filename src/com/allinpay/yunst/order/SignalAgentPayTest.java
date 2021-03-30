@@ -22,7 +22,7 @@ public class SignalAgentPayTest {
 			// 源托管代收订单付款信息
 			JSONArray collectPayList = new JSONArray();
 			HashMap<String, Object> collect1 = new HashMap<>();
-			collect1.put("bizOrderNo", "1549007009040ds");
+			collect1.put("bizOrderNo", "15490070090401ds");
 			collect1.put("amount", 1L);			
 			collectPayList.add(new JSONObject(collect1));
 			

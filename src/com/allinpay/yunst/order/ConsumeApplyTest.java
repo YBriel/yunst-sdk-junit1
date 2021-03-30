@@ -143,8 +143,8 @@ public class ConsumeApplyTest {
 			Date date = calendar.getTime();
 			String ordErexpireDatetime = sdf.format(date);
 			
-			request.put("payerId", "WHYGR2019001yza");
-			request.put("recieverId", "WHYQY2019001");
+			request.put("payerId", "1601929311");
+			request.put("recieverId", "26019293111");
 			request.put("bizOrderNo", System.currentTimeMillis() + "whyxf");
 			request.put("amount", 1L);
 			request.put("fee", 0L);
@@ -153,12 +153,12 @@ public class ConsumeApplyTest {
 			// *** split rule
 			JSONArray splitRule = new JSONArray();
 			
-			HashMap<String, Object> splitRule1 = new HashMap<>();
+			/*HashMap<String, Object> splitRule1 = new HashMap<>();
 			splitRule1.put("bizUserId", "grsunzl20190126002");
 			splitRule1.put("accountSetNo", "200087");
 			splitRule1.put("amount", 1L);
 			splitRule1.put("fee", 0L);
-			splitRule1.put("remark", " 消费一级分账");
+			splitRule1.put("remark", " 消费一级分账");*/
 			
 //			JSONArray splitRule2List1 = new JSONArray();
 //			HashMap<String, Object> splitRule2List = new HashMap<>();
@@ -187,8 +187,8 @@ public class ConsumeApplyTest {
 			request.put("backUrl", "http://116.228.64.58/yst/zfb/yibu");
 			request.put("ordErexpireDatetime", ordErexpireDatetime);
 			request.put("payMethod", payMethod);
-			request.put("goodsName", "computer");
-			request.put("goodsDesc", "computer made in china");
+			request.put("goodsName", "测试付款");
+			request.put("goodsDesc", "computer made in nc");
 			request.put("industryCode", "1010");
 			request.put("industryName", "保险代理");
 			request.put("source", 2L);
