@@ -37,10 +37,11 @@ public class MemberServiceTest {
 
 
 		//String member = MemberServiceTest.createMember("26019293111");
+		String member = MemberServiceTest.createMember("26019293111");
 	//MemberServiceTest.bindPhone("26019293111","15070032716");
 		//MemberServiceTest.setRealName("26019293111","涂莉莉","1","360124199106145769");
 
-//	MemberServiceTest.idCardCollect("26019293111",1L,"files\\yingyezhizhao.png");
+//	MemberServiceTest.idCardCollect("26019293111",9L,"files\\faRenBack.png");
 //		String member = MemberServiceTest.createMember("10123456899");
 //		System.out.println(member);
 //		MemberServiceTest.applyBindBankCard("1601929311",7L,"13576911130","6217002020037294048",
@@ -63,7 +64,7 @@ public class MemberServiceTest {
 		if(bizUserId != null && "auto".equalsIgnoreCase(bizUserId))
 			bizUserId = IDGenerator.generateGUID();
 		request.put("bizUserId", bizUserId);
-		request.put("memberType", 2);//企业会员 2  个人会员3
+		request.put("memberType", 3);//企业会员 2  个人会员3
 		request.put("source", 2);//Mobile 1 整型    PC 2 整型
 
 		logger.info("[bizUserId="+bizUserId+", memberType=3"+", source=2]");

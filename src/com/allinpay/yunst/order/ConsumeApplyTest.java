@@ -54,7 +54,7 @@ public class ConsumeApplyTest {
 			// 支付方式
 			//微信扫码支付(正扫)
 			HashMap<String, Object> SCAN_WEIXIN = new HashMap<>();
-			SCAN_WEIXIN.put("amount", 2);
+			SCAN_WEIXIN.put("amount", 1);
 			SCAN_WEIXIN.put("limitPay", "no_credit");
 			
 			//支付宝扫码支付
@@ -143,10 +143,10 @@ public class ConsumeApplyTest {
 			Date date = calendar.getTime();
 			String ordErexpireDatetime = sdf.format(date);
 			
-			request.put("payerId", "WHYGR2019001");
+			request.put("payerId", "WHYGR2019001yza");
 			request.put("recieverId", "WHYQY2019001");
 			request.put("bizOrderNo", System.currentTimeMillis() + "whyxf");
-			request.put("amount", 2L);
+			request.put("amount", 1L);
 			request.put("fee", 0L);
 			request.put("validateType",1L);
 			
@@ -179,7 +179,7 @@ public class ConsumeApplyTest {
 //			splitRule2List1.add(new JSONObject(splitRule2List));			
 //			
 //			splitRule1.put("splitRuleList", splitRule2List1);
-			splitRule.add(new JSONObject(splitRule1));
+			//splitRule.add(new JSONObject(splitRule1));
 			
 //			request.put("splitRule", splitRule);
 			
