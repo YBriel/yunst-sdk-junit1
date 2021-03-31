@@ -39,6 +39,10 @@ public class AgentCollectApplyTest {
 			getwayPay.put("bankCode", "vbank");
 			getwayPay.put("payType", 1L);
 			getwayPay.put("amount", 1L);
+
+			HashMap<String, Object> SCAN_WEIXIN = new HashMap<>();
+			SCAN_WEIXIN.put("amount", 3);
+			SCAN_WEIXIN.put("limitPay", "no_credit");
 			
 			// 支付方式
 			// 代金券（单笔）
@@ -65,7 +69,7 @@ public class AgentCollectApplyTest {
 			HashMap<String, Object> CODEPAY_VSP_ORG = new HashMap<>();
 			CODEPAY_VSP_ORG.put("authcode", "6266202232268890740");//支付宝付款码285352993287416079，微信付款码，云闪付
 			CODEPAY_VSP_ORG.put("amount", 1);
-			CODEPAY_VSP_ORG.put("limitPay", "");
+			CODEPAY_VSP_ORG.put("limitPay", "no_credit");
 			CODEPAY_VSP_ORG.put("vspCusid", "55058404816VQLX");
 			
 			//批量代金券
@@ -101,15 +105,17 @@ public class AgentCollectApplyTest {
 			HashMap<String, Object> payMethod = new HashMap<>();
 //			payMethod.put("REALNAMEPAY", realnamePay);
 //			payMethod.put("QUICKPAY_TLT", QUICKPAY_TLT);
-//			payMethod.put("CODEPAY_VSP", CODEPAY_VSP);
-			payMethod.put("CODEPAY_VSP_ORG", CODEPAY_VSP_ORG);
+	//		payMethod.put("CODEPAY_VSP", CODEPAY_VSP);
+//			payMethod.put("CODEPAY_VSP_ORG", CODEPAY_VSP_ORG);
 //			payMethod.put("GATEWAY", getwayPay);
 //			payMethod.put("BALANCE", balancePay);
 //			payMethod.put("COUPONLIST", couponList);
 //			payMethod.put("COUPON", COUPON);
 //			payMethod.put("REALNAMEPAY_BATCH", realnamePay_batch);
 //			payMethod.put("QUICKPAY_VSP", QUICKPAY_VSP);
-			
+			payMethod.put("SCAN_WEIXIN", SCAN_WEIXIN);
+
+
 			Calendar calendar = Calendar.getInstance();
 			calendar.add(Calendar.HOUR, 15);
 			Date date = calendar.getTime();
@@ -118,8 +124,8 @@ public class AgentCollectApplyTest {
 			// 收款列表
 			JSONArray receiverList = new JSONArray();
 			HashMap<String, Object> receiver1 = new HashMap<>();
-			receiver1.put("bizUserId", "WHYQY2019001");
-			receiver1.put("amount", 1);			
+			receiver1.put("bizUserId", "26019293111");
+			receiver1.put("amount", 3);
 			receiverList.add(new JSONObject(receiver1));
 			
 //			HashMap<String, Object> receiver2 = new HashMap<>();
@@ -136,17 +142,17 @@ public class AgentCollectApplyTest {
 			request.put("bizOrderNo", System.currentTimeMillis() + "ds");
 			request.put("payerId", "WHYGR2019001"); // bizUserId  付款方
 			request.put("recieverList", receiverList);
-			request.put("goodsType", 2L);
-			request.put("bizGoodsNo", "12121133211122234");
+			request.put("goodsType", 5L);
+			request.put("bizGoodsNo", "WHYGOODS002");
 			request.put("tradeCode", "1003");
-			request.put("amount", 1L);
+			request.put("amount", 3L);
 			request.put("fee", 0L);
 			request.put("validateType", 0L); // 1 短信验证
 			request.put("frontUrl", "http://192.168.14.165:8080/yundemo/servletUI/jumpback");
 			request.put("backUrl", "http://172.16.190.46:8080/yuncallback/mock/notify?");
 			request.put("ordErexpireDatetime", ordErexpireDatetime);
 			request.put("payMethod", payMethod);
-			request.put("goodsName", "海艳商超");
+			request.put("goodsName", "跨境商品");
 			request.put("goodsDesc", "computer made in china");
 			request.put("industryCode", "1010");
 			request.put("industryName", "保险代理");
