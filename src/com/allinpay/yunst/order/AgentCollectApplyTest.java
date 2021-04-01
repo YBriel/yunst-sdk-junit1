@@ -41,7 +41,7 @@ public class AgentCollectApplyTest {
 			getwayPay.put("amount", 1L);
 
 			HashMap<String, Object> SCAN_WEIXIN = new HashMap<>();
-			SCAN_WEIXIN.put("amount", 3);
+			SCAN_WEIXIN.put("amount", 5);
 			SCAN_WEIXIN.put("limitPay", "no_credit");
 			
 			// 支付方式
@@ -126,8 +126,13 @@ public class AgentCollectApplyTest {
 			HashMap<String, Object> receiver1 = new HashMap<>();
 			receiver1.put("bizUserId", "26019293111");
 			receiver1.put("amount", 3);
+
+			HashMap<String, Object> receiver2 = new HashMap<>();
+			receiver2.put("bizUserId", "1601929311");
+			receiver2.put("amount", 2);
 			receiverList.add(new JSONObject(receiver1));
-			
+			receiverList.add(new JSONObject(receiver2));
+
 //			HashMap<String, Object> receiver2 = new HashMap<>();
 //			receiver2.put("bizUserId", "2018060021");
 //			receiver2.put("amount", 10L);			
@@ -144,8 +149,8 @@ public class AgentCollectApplyTest {
 			request.put("recieverList", receiverList);
 			request.put("goodsType", 5L);
 			request.put("bizGoodsNo", "WHYGOODS002");
-			request.put("tradeCode", "1003");
-			request.put("amount", 3L);
+			request.put("tradeCode", "3001");
+			request.put("amount", 5L);
 			request.put("fee", 0L);
 			request.put("validateType", 0L); // 1 短信验证
 			request.put("frontUrl", "http://192.168.14.165:8080/yundemo/servletUI/jumpback");
