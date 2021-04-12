@@ -125,13 +125,13 @@ public class AgentCollectApplyTest {
 			JSONArray receiverList = new JSONArray();
 			HashMap<String, Object> receiver1 = new HashMap<>();
 			receiver1.put("bizUserId", "26019293111");
-			receiver1.put("amount", 3);
+			receiver1.put("amount", 4);
+			receiverList.add(new JSONObject(receiver1));
 
-			HashMap<String, Object> receiver2 = new HashMap<>();
+			/*HashMap<String, Object> receiver2 = new HashMap<>();
 			receiver2.put("bizUserId", "1601929311");
 			receiver2.put("amount", 2);
-			receiverList.add(new JSONObject(receiver1));
-			receiverList.add(new JSONObject(receiver2));
+			receiverList.add(new JSONObject(receiver2));*/
 
 //			HashMap<String, Object> receiver2 = new HashMap<>();
 //			receiver2.put("bizUserId", "2018060021");
@@ -142,16 +142,18 @@ public class AgentCollectApplyTest {
 //			receiver3.put("bizUserId", "2018060022");
 //			receiver3.put("amount", 10L);			
 //			receiverList.add(new JSONObject(receiver3));
-			
-			
-			request.put("bizOrderNo", System.currentTimeMillis() + "ds");
+
+			String bizOrderNo = System.currentTimeMillis() + "ds";
+			System.out.println("本次订单号为{}"+bizOrderNo);
+			request.put("bizOrderNo", bizOrderNo);
+
 			request.put("payerId", "WHYGR2019001"); // bizUserId  付款方
 			request.put("recieverList", receiverList);
 			request.put("goodsType", 5L);
 			request.put("bizGoodsNo", "WHYGOODS002");
 			request.put("tradeCode", "3001");
 			request.put("amount", 5L);
-			request.put("fee", 0L);
+			request.put("fee", 1L);
 			request.put("validateType", 0L); // 1 短信验证
 			request.put("frontUrl", "http://192.168.14.165:8080/yundemo/servletUI/jumpback");
 			request.put("backUrl", "http://172.16.190.46:8080/yuncallback/mock/notify?");

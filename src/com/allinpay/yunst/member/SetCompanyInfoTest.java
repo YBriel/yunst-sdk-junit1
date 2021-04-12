@@ -19,7 +19,6 @@ public class SetCompanyInfoTest {
 			request.put("bizUserId", "26019293111");
 			request.put("backUrl", "http://www.baidu.com");
 			request.put("isAuth", false);
-		
 			// 组companyBasicInfo企业信息jsonobject对象
 			JSONObject companyBasicInfo = new JSONObject();
 			companyBasicInfo.put("companyName", "江西土驴国际旅行社有限公司");

@@ -25,7 +25,7 @@ public class MemberServiceTest {
 //		System.out.println(member);
 
 		//绑定手机
-		//MemberServiceTest.bindPhone("16019293","13576911130");
+		MemberServiceTest.bindPhone("16019293","13576911130");
 
 		//实名认证
 		//MemberServiceTest.setRealName("16019293","余振清","1","360101199604066014");

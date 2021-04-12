@@ -22,24 +22,24 @@ public class SignalAgentPayTest {
 			// 源托管代收订单付款信息
 			JSONArray collectPayList = new JSONArray();
 			HashMap<String, Object> collect1 = new HashMap<>();
-			collect1.put("bizOrderNo", "1617272751658ds");
-			collect1.put("amount", 2L);
+			collect1.put("bizOrderNo", "1617341092806ds");
+			collect1.put("amount", 4L);
 			collectPayList.add(new JSONObject(collect1));
 
-			JSONArray singleRuleList = new JSONArray();
-			HashMap<String, Object> pay1 = new HashMap<>();
+			//JSONArray singleRuleList = new JSONArray();
+			//HashMap<String, Object> pay1 = new HashMap<>();
 
-			pay1.put("bizUserId", "1601929311");
-			pay1.put("remark", "消费订单二级分账余");
-			pay1.put("fee", 0L);
-			pay1.put("amount", 2L);
-			singleRuleList.add(new JSONObject(pay1));
+//			pay1.put("bizUserId", "1601929311");
+//			pay1.put("remark", "消费订单二级分账余");
+//			pay1.put("fee", 0L);
+//			pay1.put("amount", 2L);
+		//	singleRuleList.add(new JSONObject(pay1));
 			request.put("bizOrderNo", System.currentTimeMillis() + "df");
 			request.put("collectPayList", collectPayList);;
-			request.put("bizUserId", "1601929311");
+			request.put("bizUserId", "26019293111");//26019293111  1601929311
 			request.put("accountSetNo", "200126");
 			request.put("backUrl", "http://172.16.190.46:8080/yuncallback/mock/notify?");
-			request.put("amount", 2L);
+			request.put("amount", 4L);
 			request.put("fee", 0L);
 			//request.put("splitRuleList", singleRuleList);
 			request.put("goodsType", 5L);
